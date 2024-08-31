@@ -2,7 +2,7 @@ package design
 
 import kotlin.test.Test
 
-object ServerTest {
+class ServerTest {
 
     @Test
     fun initializationTest() {

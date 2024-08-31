@@ -7,6 +7,7 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class LibraryTest {
+
     @Test
     fun someLibraryMethodReturnsTrue() {
         val classUnderTest = Library()
@@ -18,4 +19,5 @@ class LibraryTest {
         val cl1 = Pawn('a', '3')
         println(cl1)
     }
+
 }
