@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -13,10 +14,12 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+
+    val xcFramework = XCFramework("Shared")
+
     iosX64 {
-        binaries.framework {
-            baseName = "Shared"
-            isStatic = false
+        binaries.framework("Shared") {
+            xcFramework.add(this)
         }
     }
 
@@ -38,11 +41,16 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC.2")
             }
         }
+
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC.2")
             }
+        }
+
+        iosX64().binaries {
+            framework()
         }
     }
 }
