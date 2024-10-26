@@ -1,5 +1,8 @@
 package design
 
+import kotlinx.cinterop.*
+import platform.posix.memcpy
+
 object KmpObject {
     val name: String = "KotlinObject"
     override fun toString(): String = "KmpObject($name)"
@@ -41,3 +44,13 @@ fun acceptInvokeFun(f: (String) -> String) {
 fun supplyFun() : (String) -> String? =
     { "A String function param from Native '$it' is returned as a part of Kotlin string" }
 
+fun readNativeByteArray(byteArray: CPointer<ByteVar>, size: Int) {
+    println("ReadBytes: ${byteArray.readBytes(size).contentToString()}")
+    val tmp = ByteArray(size)
+    memcpy(tmp.toCValues(), byteArray, size.toULong())
+    println("Memcpy: ${tmp.contentToString()}")
+}
+
+fun readByteArray(byteArray: ByteArray) {
+    println(byteArray.contentToString())
+}
