@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
 }
 
+val libraryName = "KmpSample"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -15,17 +17,22 @@ kotlin {
         }
     }
 
-    val xcFramework = XCFramework("Shared")
+    val xcFramework = XCFramework(libraryName)
 
     iosX64 {
-        binaries.framework("Shared") {
+        binaries.framework(libraryName) {
             xcFramework.add(this)
         }
     }
 
     macosX64 {
         binaries {
-            sharedLib()
+            sharedLib {
+                baseName = libraryName
+            }
+            framework {
+                baseName = libraryName
+            }
         }
     }
 
@@ -38,19 +45,15 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC.2")
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
 
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC.2")
+                implementation(libs.kotlinx.coroutines.test)
             }
-        }
-
-        iosX64().binaries {
-            framework()
         }
     }
 }
