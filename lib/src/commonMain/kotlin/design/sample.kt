@@ -1,23 +1,43 @@
 package design
 
-object Object {
-    val field = "A"
+object KmpObject {
+    val name: String = "KotlinObject"
+    override fun toString(): String = "KmpObject($name)"
 }
 
-interface Interface {
-    fun iMember() {}
+interface KmpInterface {
+    fun interfaceMethod(): String
 }
 
-class Clazz: Interface {
-    fun member(p: Int): ULong? = 42UL
+class KmpClazz: KmpInterface {
+    fun returnLong(): Long? = 42L
+    fun returnInt(): Int? = 42
+    override fun interfaceMethod(): String {
+        return "KmpClazz"
+    }
+
+    protected fun finalize() {
+        println("The instance of $this is being finalized")
+    }
 }
 
-fun forIntegers(b: Byte, s: UShort, i: Int, l: ULong?) {}
-fun forFloats(f: Float, d: Double?) {}
-
-fun strings(str: String?) :  String {
-    return "That is '$str' from C"
+fun acceptInteger(i: Int?) {
+    println("Got Int($i) from Native")
+}
+fun acceptDouble(d: Double?) {
+    println("Got Double($d) from Native")
 }
 
-fun acceptFun(f: (String) -> String) = f("Kotlin/Native rocks!")
-fun supplyFun() : (String) -> String? = { "$it is cool!" }
+fun acceptString(str: String?) :  String {
+    println("Got '$str' from Native")
+    return "That is '$str' from Native"
+}
+
+fun acceptInvokeFun(f: (String) -> String) {
+    val nativeFunctionResult = f("String param from Kotlin")
+    println("String result '$nativeFunctionResult' from Native function")
+}
+
+fun supplyFun() : (String) -> String? =
+    { "A String function param from Native '$it' is returned as a part of Kotlin string" }
+

@@ -17,7 +17,7 @@ kotlin {
         }
     }
 
-    val xcFramework = XCFramework(libraryName)
+    val xcFramework = XCFramework("XC$libraryName")
 
     iosX64 {
         binaries.framework(libraryName) {
@@ -27,12 +27,8 @@ kotlin {
 
     macosX64 {
         binaries {
-            sharedLib {
-                baseName = libraryName
-            }
-            framework {
-                baseName = libraryName
-            }
+            sharedLib(libraryName)
+            framework(libraryName)
         }
     }
 
