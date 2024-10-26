@@ -1,11 +1,18 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
 //    alias(libs.plugins.androidLibrary)
 }
+
+//tasks.withType<KotlinCompilationTask>().configureEach {
+//    compilerOptions {
+//        freeCompilerArgs.add("-Xruntime-logs=gc=info")
+//    }
+//}
 
 val libraryName = "KmpSample"
 
@@ -23,12 +30,22 @@ kotlin {
         binaries.framework(libraryName) {
             xcFramework.add(this)
         }
+        compilations.configureEach {
+            compilerOptions.configure {
+                freeCompilerArgs.add("-Xruntime-logs=gc=info")
+            }
+        }
     }
 
     macosX64 {
         binaries {
             sharedLib(libraryName)
             framework(libraryName)
+            compilations.configureEach {
+                compilerOptions.configure {
+                    freeCompilerArgs.add("-Xruntime-logs=gc=info")
+                }
+            }
         }
     }
 
