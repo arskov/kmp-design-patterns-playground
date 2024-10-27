@@ -45,10 +45,10 @@ fun supplyFun() : (String) -> String? =
     { "A String function param from Native '$it' is returned as a part of Kotlin string" }
 
 fun readNativeByteArray(byteArray: CPointer<ByteVar>, size: Int) {
-    println("ReadBytes: ${byteArray.readBytes(size).contentToString()}")
+    println("ReadBytes: ${byteArray.readBytes(size).toHexString()}")
     val tmp = ByteArray(size)
-    memcpy(tmp.toCValues(), byteArray, size.toULong())
-    println("Memcpy: ${tmp.contentToString()}")
+    memcpy(tmp.pin().addressOf(0), byteArray, size.toULong())
+    println("Memcpy: ${tmp.toHexString()}")
 }
 
 fun readByteArray(byteArray: ByteArray) {
