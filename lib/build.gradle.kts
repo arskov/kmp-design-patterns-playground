@@ -5,24 +5,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-//    alias(libs.plugins.androidLibrary)
 }
-
-//tasks.withType<KotlinCompilationTask>().configureEach {
-//    compilerOptions {
-//        freeCompilerArgs.add("-Xruntime-logs=gc=info")
-//    }
-//}
 
 val libraryName = "KmpSample"
 
 kotlin {
-//    androidTarget {
-//        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-//        compilerOptions {
-//            jvmTarget.set(JvmTarget.JVM_11)
-//        }
-//    }
 
     val xcFramework = XCFramework("XC$libraryName")
 
@@ -81,15 +68,3 @@ kotlin {
         }
     }
 }
-
-//android {
-//    namespace = "com.design.shared"
-//    compileSdk = libs.versions.android.compileSdk.get().toInt()
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_11
-//        targetCompatibility = JavaVersion.VERSION_11
-//    }
-//    defaultConfig {
-//        minSdk = libs.versions.android.minSdk.get().toInt()
-//    }
-//}
