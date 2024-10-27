@@ -11,8 +11,8 @@ Run `./gradlew assemble`. Expect binaries in the (`X64` - Intel CPU machine, `Ar
 
 ## Use the shared library or the framework
 
-- The [XCode CLI C++ (KMP Shared Library)](https://github.com/arskov/kmp-cpp) project contains the sample code which uses a shared library built from this KMP library in the smaple CLI C++ executable.
-- (TODO) The XCode CLI Swift (KMP Appple Framework) 
+- The [XCode CLI C++ (KMP Shared Library)](https://github.com/arskov/kmp-cpp) project contains sample code that uses a shared library built from this KMP library in the smaple CLI C++ executable.
+- The [XCode CLI Swift (KMP Appple Framework)](https://github.com/arskov/kmp-swift) project contains sample code that uses an XCFramework built by this project  
 
 
 ## [TBD] Mobile Configuration

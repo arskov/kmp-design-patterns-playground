@@ -11,7 +11,7 @@ val libraryName = "KmpSample"
 
 kotlin {
 
-    val xcFramework = XCFramework("XC$libraryName")
+    val xcFramework = XCFramework(libraryName)
 
     iosX64 {
         binaries.framework(libraryName) {
@@ -27,7 +27,9 @@ kotlin {
     macosX64 {
         binaries {
             sharedLib(libraryName)
-            framework(libraryName)
+            framework(libraryName) {
+                xcFramework.add(this)
+            }
             compilations.configureEach {
                 compilerOptions.configure {
                     freeCompilerArgs.add("-Xruntime-logs=gc=info")
